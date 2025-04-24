@@ -12,6 +12,9 @@ spec:
     name: my-app-source # Matches the name in gitrepository.yaml
   targetNamespace: demo # Alterado de default para demo
   timeout: 2m # Timeout for operations
+  dependsOn:
+    - name: infrastructure
+      namespace: flux-system
   healthChecks:
     - apiVersion: apps/v1
       kind: Deployment
