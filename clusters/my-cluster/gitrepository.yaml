@@ -11,5 +11,3 @@ spec:
   url: https://github.com/josenetoo/fluxcd-demo # Replace with your repo URL
   ref:
     branch: main # Or your default branch
-  verify:
-    mode: cosign # Enable Cosign verification for Git commits
