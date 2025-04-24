@@ -1,7 +1,4 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
-  - namespace.yaml
-  - weave-gitops-repository.yaml
-  - weave-gitops.yaml
-  - weave-gitops-service.yaml 
+  - namespace.yaml 
