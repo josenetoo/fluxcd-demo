@@ -9,19 +9,27 @@ Este repositório contém uma demonstração de um fluxo GitOps usando FluxCD no
 ├── apps/                     # Diretório contendo aplicações
 │   └── base/                 # Manifests base do aplicativo Hello World
 │       ├── deployment.yaml   # Deployment do Hello World com probes e resource limits
-│       ├── kustomization.yaml  # Configuração Kustomize
+│       ├── kustomization.yaml  # Configuração Kustomize (lista deployment.yaml e service.yaml)
 │       └── service.yaml      # Service do Hello World com configurações do OCI LB
 ├── clusters/                 # Configurações específicas dos clusters
 │   └── my-cluster/           # Configuração do cluster de demonstração
-│       ├── gitrepository.yaml  # Configuração da fonte Git
-│       ├── kustomization.yaml  # Configuração Kustomize nativa
-│       └── kustomization-flux.yaml  # Configuração FluxCD Kustomization
+│       ├── gitrepository.yaml     # Define a fonte Git para o Flux (seu repositório)
+│       ├── kustomization.yaml     # Configuração Kustomize nativa (lista os outros arquivos yaml)
+│       ├── kustomization-flux.yaml  # Define como o Flux aplica os arquivos em apps/base
+│       └── kustomization-infra.yaml # Define como o Flux aplica os arquivos em infrastructure/base
 └── infrastructure/           # Recursos de infraestrutura
     └── base/                 # Recursos base de infraestrutura
-        ├── kustomization.yaml  # Configuração Kustomize
+        ├── kustomization.yaml  # Configuração Kustomize (lista namespace.yaml)
         └── namespace.yaml    # Definição do namespace demo
 
 ```
+
+## Fluxo de Execução
+
+1. O Flux obtém os arquivos do repositório Git conforme definido em `gitrepository.yaml`
+2. O Flux aplica primeiro a infraestrutura (`kustomization-infra.yaml`) para criar a namespace `demo`
+3. Após a criação da infraestrutura, o Flux aplica a aplicação (`kustomization-flux.yaml`)
+4. O Flux continua monitorando o repositório para mudanças conforme o intervalo definido
 
 ## Instruções de Uso
 
@@ -57,6 +65,7 @@ Este repositório contém uma demonstração de um fluxo GitOps usando FluxCD no
 Verifique se os recursos foram aplicados:
 
 ```bash
+kubectl get namespace demo
 kubectl get deployments,services -n demo
 flux get kustomizations
 flux get sources git
@@ -69,12 +78,21 @@ flux get sources git
 - Estrutura GitOps para manutenção contínua
 - Verificação de saúde dos deployments
 - Namespace dedicada (`demo`) para isolamento de recursos
+- Dependências claramente definidas entre infraestrutura e aplicação
 
 ## Próximos Passos
 
 1. Adicione mais aplicações na pasta `apps/`
 2. Configure múltiplos ambientes (dev, staging, prod)
 3. Implemente workflows de CI para testes antes da entrega
+
+## Solução de Problemas
+
+Se a aplicação não for implantada corretamente, verifique:
+
+1. Se a namespace `demo` foi criada: `kubectl get namespace demo`
+2. O status das kustomizations: `flux get kustomizations`
+3. Os logs detalhados: `flux logs --kind=kustomization --name=infrastructure`
 
 ## Referências
 
