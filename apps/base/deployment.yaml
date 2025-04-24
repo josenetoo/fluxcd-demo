@@ -1,23 +1,23 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: nginx-deployment
-  namespace: default # Or your target namespace
+  name: hello-world-deployment
+  namespace: demo
   labels:
-    app: nginx
+    app: hello-world
 spec:
   replicas: 2
   selector:
     matchLabels:
-      app: nginx
+      app: hello-world
   template:
     metadata:
       labels:
-        app: nginx
+        app: hello-world
     spec:
       containers:
-      - name: nginx
-        image: nginx:1.25 # Use a specific version
+      - name: hello-world
+        image: dockercloud/hello-world:latest
         ports:
         - containerPort: 80
         resources:

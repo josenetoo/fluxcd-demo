@@ -7,18 +7,19 @@ Este repositório contém uma demonstração de um fluxo GitOps usando FluxCD no
 ```
 .
 ├── apps/                     # Diretório contendo aplicações
-│   └── base/                 # Manifests base do aplicativo NGINX
-│       ├── deployment.yaml   # Deployment do NGINX com probes e resource limits
+│   └── base/                 # Manifests base do aplicativo Hello World
+│       ├── deployment.yaml   # Deployment do Hello World com probes e resource limits
 │       ├── kustomization.yaml  # Configuração Kustomize
-│       └── service.yaml      # Service do NGINX com configurações do OCI LB
+│       └── service.yaml      # Service do Hello World com configurações do OCI LB
 ├── clusters/                 # Configurações específicas dos clusters
 │   └── my-cluster/           # Configuração do cluster de demonstração
 │       ├── gitrepository.yaml  # Configuração da fonte Git
-│       └── kustomization.yaml  # Configuração FluxCD Kustomization
+│       ├── kustomization.yaml  # Configuração Kustomize nativa
+│       └── kustomization-flux.yaml  # Configuração FluxCD Kustomization
 └── infrastructure/           # Recursos de infraestrutura
     └── base/                 # Recursos base de infraestrutura
         ├── kustomization.yaml  # Configuração Kustomize
-        └── namespace.yaml    # Definição do namespace
+        └── namespace.yaml    # Definição do namespace demo
 
 ```
 
@@ -56,17 +57,18 @@ Este repositório contém uma demonstração de um fluxo GitOps usando FluxCD no
 Verifique se os recursos foram aplicados:
 
 ```bash
-kubectl get deployments,services -n default
+kubectl get deployments,services -n demo
 flux get kustomizations
 flux get sources git
 ```
 
 ## Características
 
-- Aplicação NGINX de demonstração com probes e limites de recursos
+- Aplicação Hello World de demonstração com probes e limites de recursos
 - Configuração otimizada para Oracle Cloud Load Balancer
 - Estrutura GitOps para manutenção contínua
 - Verificação de saúde dos deployments
+- Namespace dedicada (`demo`) para isolamento de recursos
 
 ## Próximos Passos
 

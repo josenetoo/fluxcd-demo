@@ -10,10 +10,10 @@ spec:
   sourceRef:
     kind: GitRepository
     name: my-app-source # Matches the name in gitrepository.yaml
-  targetNamespace: default # Namespace where the app resources will be created
+  targetNamespace: demo # Alterado de default para demo
   timeout: 2m # Timeout for operations
   healthChecks:
     - apiVersion: apps/v1
       kind: Deployment
       name: nginx-deployment
-      namespace: default 
+      namespace: demo # Alterado de default para demo 
