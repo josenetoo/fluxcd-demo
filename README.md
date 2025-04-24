@@ -65,7 +65,7 @@ flux get sources git
 ## Características
 
 - Aplicação Hello World de demonstração com probes e limites de recursos
-- Configuração otimizada para Oracle Cloud Load Balancer
+- Configuração para Oracle Cloud Load Balancer
 - Estrutura GitOps para manutenção contínua
 - Verificação de saúde dos deployments
 - Namespace dedicada (`demo`) para isolamento de recursos
