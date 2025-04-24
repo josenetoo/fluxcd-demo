@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx-service
+  namespace: default # Or your target namespace
+  labels:
+    app: nginx
+    environment: demo
+  annotations:
+    # For OCI Load Balancer (uncomment as needed):
+    oci.oraclecloud.com/load-balancer-shape: "flexible"
+    oci.oraclecloud.com/load-balancer-shape-flex-min: "10"
+    oci.oraclecloud.com/load-balancer-shape-flex-max: "100"
+    # service.beta.kubernetes.io/oci-load-balancer-internal: "true" # If internal LB needed
+spec:
+  type: LoadBalancer # Use ClusterIP if you don't want an external LB, or NodePort
+  selector:
+    app: nginx
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+      name: http 

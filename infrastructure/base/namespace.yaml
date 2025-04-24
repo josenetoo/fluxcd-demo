@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: default
+  labels:
+    app: my-app
+    environment: demo
+    istio-injection: enabled 

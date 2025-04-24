@@ -1,0 +1,22 @@
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: my-app
+  namespace: flux-system # Flux default namespace
+spec:
+  interval: 5m # How often to apply changes
+  path: ./apps/base # Path within the Git repo to the app manifests
+  prune: true # Automatically delete resources removed from Git
+  sourceRef:
+    kind: GitRepository
+    name: my-app-source # Matches the name in gitrepository.yaml
+  targetNamespace: default # Namespace where the app resources will be created
+  timeout: 2m # Timeout for operations
+  healthChecks:
+    - apiVersion: apps/v1
+      kind: Deployment
+      name: nginx-deployment
+      namespace: default
+  dependsOn:
+    - name: infrastructure # Assuming you have a separate infra kustomization
+      namespace: flux-system 

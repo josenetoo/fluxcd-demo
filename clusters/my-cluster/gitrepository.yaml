@@ -1,0 +1,15 @@
+apiVersion: source.toolkit.fluxcd.io/v1
+kind: GitRepository
+metadata:
+  name: my-app-source
+  namespace: flux-system # Flux default namespace
+  labels:
+    app: my-app
+    environment: demo
+spec:
+  interval: 1m # How often to check for changes
+  url: https://github.com/josenetoo/fluxcd-demo # Replace with your repo URL
+  ref:
+    branch: main # Or your default branch
+  verify:
+    mode: cosign # Enable Cosign verification for Git commits
