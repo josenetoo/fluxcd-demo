@@ -16,7 +16,4 @@ spec:
     - apiVersion: apps/v1
       kind: Deployment
       name: nginx-deployment
-      namespace: default
-  dependsOn:
-    - name: infrastructure # Assuming you have a separate infra kustomization
-      namespace: flux-system 
+      namespace: default 
