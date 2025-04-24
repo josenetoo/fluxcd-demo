@@ -7,10 +7,10 @@ Este repositório contém uma demonstração de um fluxo GitOps usando FluxCD no
 ```
 .
 ├── apps/                     # Diretório contendo aplicações
-│   └── base/                 # Manifests base do aplicativo Hello World
-│       ├── deployment.yaml   # Deployment do Hello World com probes e resource limits
+│   └── base/                 # Manifests base do aplicativo NGINX
+│       ├── deployment.yaml   # Deployment do NGINX com probes e resource limits
 │       ├── kustomization.yaml  # Configuração Kustomize (lista deployment.yaml e service.yaml)
-│       └── service.yaml      # Service do Hello World com configurações do OCI LB
+│       └── service.yaml      # Service do NGINX com configurações do OCI LB
 ├── clusters/                 # Configurações específicas dos clusters
 │   └── my-cluster/           # Configuração do cluster de demonstração
 │       ├── gitrepository.yaml     # Define a fonte Git para o Flux (seu repositório)
@@ -73,7 +73,7 @@ flux get sources git
 
 ## Características
 
-- Aplicação Hello World de demonstração com probes e limites de recursos
+- Aplicação NGINX de demonstração com probes e limites de recursos
 - Configuração para Oracle Cloud Load Balancer
 - Estrutura GitOps para manutenção contínua
 - Verificação de saúde dos deployments

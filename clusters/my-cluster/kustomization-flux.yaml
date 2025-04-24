@@ -18,5 +18,5 @@ spec:
   healthChecks:
     - apiVersion: apps/v1
       kind: Deployment
-      name: hello-world-deployment
-      namespace: demo # Alterado de default para demo 
+      name: nginx-deployment
+      namespace: demo 
